@@ -1,448 +1,364 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Media Pembelajaran Interaktif: Pengenalan Alat-Alat Laboratorium Kimia</title>
-
-  <!-- SEO & Aksesibilitas -->
-  <meta name="description" content="Modul interaktif pengenalan alat-alat laboratorium kimia: fungsi, cara penggunaan, perawatan, keamanan, dan kuis latihan." />
-  <meta name="keywords" content="kimia, laboratorium, alat lab, pembelajaran, interaktif, keselamatan" />
-  <meta name="author" content="Gilang Yuda Pratama, S.Pd" />
-
-  <style>
-    :root{
-      --primary:#2c3e50; --secondary:#3498db; --accent:#e74c3c; --success:#2ecc71; --light:#ecf0f1; --dark:#2c3e50;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:#f6f8fb;color:#243342;line-height:1.6}
-    a{color:inherit}
-
-    /* Header */
-    header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:1.25rem 1rem;position:sticky;top:0;z-index:50}
-    header h1{margin:0;text-align:center;font-weight:700}
-    .utility-bar{display:flex;gap:.75rem;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:.75rem}
-    .search-box{display:flex;flex:1;min-width:260px}
-    .search-box input{flex:1;padding:.6rem;border:1px solid #d9dee6;border-right:0;border-radius:8px 0 0 8px}
-    .btn{background:var(--secondary);color:#fff;border:0;border-radius:8px;padding:.6rem .9rem;cursor:pointer}
-    .btn:hover{filter:brightness(0.95)}
-    #bookmarkBtn{background:#f39c12}
-
-    /* Skip link */
-    .skip-link{position:absolute;left:1rem;top:-40px;background:#000;color:#fff;padding:8px;border-radius:6px}
-    .skip-link:focus{top:1rem}
-
-    /* Layout */
-    main.container{max-width:1200px;margin:0 auto;padding:1rem}
-
-    /* Nav */
-    nav[role="navigation"]{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:1rem 0}
-    .nav-list{display:flex;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-    .nav-item{flex:1;min-width:200px}
-    .nav-link{display:block;padding:.9rem 1rem;text-decoration:none;text-align:center;color:var(--dark);border-bottom:3px solid transparent}
-    .nav-link:hover{background:#f3f7fb;border-bottom-color:var(--secondary)}
-    .nav-link.active{background:#eaf4ff;border-bottom-color:var(--secondary);color:var(--secondary)}
-
-    /* Progress */
-    .progress-container{margin:1rem 0;background:#fff;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .progress-bar{height:10px;background:#ecf0f1;border-radius:6px;overflow:hidden}
-    .progress-fill{height:100%;background:linear-gradient(90deg,#2ecc71,#3498db);width:0%;transition:width .5s ease}
-
-    /* Cards */
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-    @media (max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:480px){.grid{grid-template-columns:1fr}}
-    .card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden;display:flex;flex-direction:column}
-    .card .thumb{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:46px}
-    .card h4{margin:.75rem 1rem .25rem;color:var(--primary)}
-    .card p{margin:0 1rem 1rem;color:#4b5b6a;font-size:.95rem}
-    .card .card-actions{margin:.25rem 1rem 1rem}
-
-    .content-section{display:none;background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin:1rem 0}
-    .content-section.active{display:block;animation:fadeIn .4s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-    .badge{display:inline-block;padding:.25rem .5rem;border-radius:999px;font-size:.75rem;background:#eef3f9;color:#3c4d63;margin-right:.25rem}
-    .note{background:#f8fafc;border-left:4px solid var(--secondary);padding:1rem;border-radius:0 12px 12px 0;margin:1rem 0}
-    .highlight{background:yellow}
-
-    /* Modal */
-    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000}
-    .modal-content{background:#fff;width:min(900px,92%);margin:5% auto;border-radius:14px;padding:1.25rem;max-height:80vh;overflow:auto}
-    .modal .close{float:right;font-size:28px;cursor:pointer;color:#999}
-
-    /* DnD Area */
-    .dnd{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .dropzone{min-height:120px;background:#f2f6fb;border:2px dashed #c9d6e6;border-radius:12px;padding:1rem}
-    .draggable{display:inline-block;background:#fff;border:1px solid #dde6f2;border-radius:999px;padding:.45rem .7rem;margin:.25rem;cursor:grab}
-
-    footer{margin:2rem 0 3rem;color:#738398;text-align:center}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengenalan Alat Laboratorium Kimia</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .hero {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232c3e50" opacity="0.1"/><path d="M30,30 L70,30 L70,70 L30,70 Z" fill="none" stroke="%233498db" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="%23e74c3c" stroke-width="2"/></svg>');
+            background-size: cover;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-bar {
+            display: flex;
+            margin: 1.5rem auto;
+            max-width: 600px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tool-image {
+            height: 200px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .tool-info {
+            padding: 1.5rem;
+        }
+        
+        .tool-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: var(--primary);
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .option {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        .submit-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <a href="#main" class="skip-link">Langsung ke konten utama</a>
-  <header>
-    <h1>Pengenalan Alat-Alat Laboratorium Kimia</h1>
-    <div class="utility-bar">
-      <div class="search-box" role="search">
-        <input id="searchInput" type="text" placeholder="Cari alat, fungsi, atau keselamatan..." aria-label="Pencarian" />
-        <button class="btn" onclick="searchContent()" aria-label="Cari">Cari</button>
-      </div>
-      <button class="btn" id="bookmarkBtn" onclick="toggleBookmark()" aria-label="Bookmark">⭐ Bookmark</button>
-    </div>
-  </header>
-
-  <main id="main" class="container">
-    <nav role="navigation" aria-label="Menu utama">
-      <ul class="nav-list">
-        <li class="nav-item"><a href="#" class="nav-link active" data-target="intro">Pendahuluan</a></li>
-        <li class="nav-item"><a href="#" class="nav-link" data-target="galeri">Galeri Alat</a></li>
-        <li class="nav-item"><a href="#" class="nav-link" data-target="keselamatan">Keselamatan</a></li>
-        <li class="nav-item"><a href="#" class="nav-link" data-target="latihan">Latihan DnD</a></li>
-        <li class="nav-item"><a href="#" class="nav-link" data-target="kuis">Kuis</a></li>
-        <li class="nav-item"><a href="#" class="nav-link" data-target="biodata">Biodata Guru</a></li>
-      </ul>
+    <header>
+        <h1>Pengenalan Alat-Alat Laboratorium Kimia</h1>
+        <p>Media Pembelajaran Interaktif untuk Siswa SMA/SMK</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#" class="active">Beranda</a></li>
+            <li><a href="#">Katalog Alat</a></li>
+            <li><a href="#">Kuis</a></li>
+            <li><a href="#">Tentang</a></li>
+        </ul>
     </nav>
-
-    <div class="progress-container" aria-live="polite">
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <p>Progress Belajar: <span id="progressText">0%</span></p>
-    </div>
-
-    <!-- Pengenalan -->
-    <section id="intro" class="content-section active">
-      <h2>Tujuan Pembelajaran</h2>
-      <p>Setelah mempelajari modul ini, peserta didik mampu:</p>
-      <ul>
-        <li>Mengenali nama, fungsi, dan simbol dari alat-alat laboratorium kimia umum.</li>
-        <li>Memahami cara penggunaan dasar dan perawatan alat.</li>
-        <li>Menerapkan prinsip <em>Keselamatan & Kesehatan Kerja (K3)</em> di laboratorium.</li>
-      </ul>
-      <div class="note" role="note">
-        <strong>Tip:</strong> Klik kartu alat untuk membuka detail (fungsi, cara pakai, perawatan, ikon bahaya terkait).
-      </div>
-    </section>
-
-    <!-- Galeri Alat -->
-    <section id="galeri" class="content-section" aria-label="Galeri alat laboratorium">
-      <h2>Galeri Alat</h2>
-      <div class="grid" id="alatGrid" aria-live="polite"></div>
-    </section>
-
-    <!-- Keselamatan -->
-    <section id="keselamatan" class="content-section">
-      <h2>Keselamatan & K3 Laboratorium</h2>
-      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-        <div class="card"><div class="thumb">🧤</div><h4>APD Dasar</h4><p>Jas lab, kacamata keselamatan, sarung tangan, sepatu tertutup.</p></div>
-        <div class="card"><div class="thumb">🚫</div><h4>Larangan Umum</h4><p>Tidak makan/minum, tidak bercanda berlebihan, rambut diikat.</p></div>
-        <div class="card"><div class="thumb">🧯</div><h4>Keadaan Darurat</h4><p>Kenali lokasi APAR, shower darurat, eyewash, kotak P3K.</p></div>
-      </div>
-      <div class="note"><strong>Ingat:</strong> Baca MSDS sebelum menggunakan bahan kimia baru. Ikuti instruksi guru/laboran.</div>
-    </section>
-
-    <!-- Latihan Drag & Drop -->
-    <section id="latihan" class="content-section">
-      <h2>Latihan: Cocokkan Nama dengan Alat (Drag & Drop)</h2>
-      <p>Tarik nama alat ke kotak yang sesuai.</p>
-      <div class="dnd">
-        <div>
-          <h3>Nama Alat</h3>
-          <div id="names"></div>
+    
+    <div class="container">
+        <div class="hero">
+            <h2>Selamat Datang di Lab Kimia Digital</h2>
+            <p>Jelajahi berbagai alat laboratorium kimia, pelajari fungsi dan cara penggunaannya, serta uji pengetahuan Anda dengan kuis interaktif.</p>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Cari alat laboratorium...">
+                <button>Cari</button>
+            </div>
         </div>
-        <div>
-          <h3>Target Gambar</h3>
-          <div id="targets" class="grid" style="grid-template-columns:1fr 1fr"></div>
+        
+        <h2>Alat-Alat Laboratorium Populer</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-image">[Gambar Tabung Reaksi]</div>
+                <div class="tool-info">
+                    <h3>Tabung Reaksi</h3>
+                    <p>Tabung reaksi digunakan untuk mencampur, menampung, dan memanaskan bahan kimia cair atau padat dalam jumlah kecil.</p>
+                    <a href="#" class="read-more">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-image">[Gambar Gelas Kimia]</div>
+                <div class="tool-info">
+                    <h3>Gelas Kimia (Beaker)</h3>
+                    <p>Gelas kimia digunakan untuk menampung, mencampur, dan memanaskan cairan. Tersedia dalam berbagai ukuran volume.</p>
+                    <a href="#" class="read-more">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-image">[Gambar Labu Erlenmeyer]</div>
+                <div class="tool-info">
+                    <h3>Labu Erlenmeyer</h3>
+                    <p>Labu erlenmeyer digunakan untuk mencampur dan menyimpan larutan. Bentuknya yang meruncing membantu dalam pengocokan tanpa takut tumpah.</p>
+                    <a href="#" class="read-more">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card-actions"><button class="btn" onclick="cekDnD()">Periksa</button> <span id="dndHasil" class="badge" aria-live="polite"></span></div>
-    </section>
-
-    <!-- Kuis -->
-    <section id="kuis" class="content-section">
-      <h2>Kuis Pilihan Ganda</h2>
-      <div id="quizContainer"></div>
-      <div class="card-actions"><button class="btn" onclick="checkQuiz()">Kumpulkan Jawaban</button> <span id="quizScore" class="badge" aria-live="polite"></span></div>
-    </section>
-
-    <!-- Biodata -->
-    <section id="biodata" class="content-section">
-      <h2>Biodata Guru</h2>
-      <div class="card" style="flex-direction:row;gap:1rem;align-items:center;padding:1rem">
-        <div class="thumb" style="width:120px;height:120px;border-radius:50%;background:#eaf4ff;font-size:36px">👩‍🏫</div>
-        <div>
-          <h3>Gilang Yuda Pratama, S.Pd</h3>
-          <p><strong>Mata Pelajaran:</strong> Kimia • <strong>Sekolah:</strong> SMAN 10 Kabupaten Tangerang</p>
-          <p><em>"Keselamatan dulu, eksperimen kemudian."</em></p>
+        
+        <div class="quiz-container">
+            <h2>Kuis Pengetahuan Laboratorium</h2>
+            <div class="quiz-question">
+                <p>1. Alat apakah yang digunakan untuk mengukur volume cairan dengan ketelitian tinggi?</p>
+                <div class="options">
+                    <div class="option">Gelas kimia</div>
+                    <div class="option">Tabung reaksi</div>
+                    <div class="option selected">Pipet volumetrik</div>
+                    <div class="option">Labu destilasi</div>
+                </div>
+            </div>
+            
+            <button class="submit-btn">Kirim Jawaban</button>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Modal Detail Alat -->
-  <div id="alatModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="alatTitle">
-    <div class="modal-content">
-      <span class="close" onclick="tutupModal()" aria-label="Tutup">&times;</span>
-      <h2 id="alatTitle"></h2>
-      <p id="alatFungsi"></p>
-      <div id="alatInfo" class="note"></div>
-      <p id="alatPerawatan"></p>
-      <div id="alatBahaya"></div>
     </div>
-  </div>
+    
+    <footer>
+        <p>Media Pembelajaran Interaktif Pengenalan Alat-Alat Laboratorium Kimia</p>
+        <p>© 2023 - Dibuat untuk tujuan edukasi</p>
+    </footer>
 
-  <footer>
-    <p>&copy; 2025 • Media Pembelajaran Interaktif Alat Lab Kimia</p>
-  </footer>
-
-  <button class="btn" style="position:fixed;bottom:20px;right:20px;z-index:999" onclick="bukaKuisAkhir()">🧪 Kuis Akhir</button>
-
-  <!-- Modal Kuis Akhir -->
-  <div id="quizModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
-    <div class="modal-content">
-      <span class="close" onclick="tutupKuisAkhir()" aria-label="Tutup">&times;</span>
-      <h2 id="quizTitle">Kuis Akhir Perlengkapan Lab</h2>
-      <div id="comprehensiveQuiz"></div>
-      <div class="card-actions"><button class="btn" onclick="checkComprehensiveQuiz()">Kumpulkan</button> <span id="quizAkhirScore" class="badge"></span></div>
-    </div>
-  </div>
-
-  <script>
-    // ======= Data Alat =======
-    const ALAT = [
-      {id:'beaker', nama:'Gelas Kimia (Beaker)', emoji:'🥛', fungsi:'Menampung, mengaduk, memanaskan larutan dalam jumlah sedang.', penggunaan:'Jangan digunakan untuk pengukuran volume presisi.', perawatan:'Bilas segera setelah dipakai, hindari perubahan suhu mendadak.', bahaya:['🔥 Panas','🧪 Percikan']},
-      {id:'erlen', nama:'Labu Erlenmeyer', emoji:'🔺', fungsi:'Pencampuran larutan, titrasi (dengan buret).', penggunaan:'Cocok untuk diaduk berputar, kurangi tumpahan.', perawatan:'Cuci leher dan dasar dengan sikat botol.', bahaya:['🧪 Asam/Basa','💥 Tekanan uap']},
-      {id:'buret', nama:'Buret', emoji:'🧵', fungsi:'Pengeluaran volume cairan sangat presisi (titrasi).', penggunaan:'Hilangkan gelembung di ujung; catat volume awal/akhir.', perawatan:'Cuci dengan air suling; simpan vertikal.', bahaya:['🧪 Reagen','📏 Presisi']},
-      {id:'pipvol', nama:'Pipet Volumetrik', emoji:'🧪', fungsi:'Mengambil volume tetap dengan presisi.', penggunaan:'Gunakan propipet, jangan dengan mulut.', perawatan:'Bilas dengan larutan yang sama (conditioning).', bahaya:['⚠️ Kontaminasi']},
-      {id:'pipet', nama:'Pipet Tetes', emoji:'💧', fungsi:'Menambahkan tetesan cairan.', penggunaan:'Tidak untuk pengukuran presisi.', perawatan:'Bersihkan ujung; hindari kontaminasi silang.', bahaya:['🧼 Kebersihan']},
-      {id:'labuukur', nama:'Labu Ukur', emoji:'⚗️', fungsi:'Menyiapkan larutan standar pada volume tepat.', penggunaan:'Isi sampai garis kalibrasi (meniskus).', perawatan:'Jangan dipanaskan, simpan tutupnya.', bahaya:['📏 Presisi']},
-      {id:'meas', nama:'Gelas Ukur', emoji:'🥤', fungsi:'Mengukur volume dengan ketelitian sedang.', penggunaan:'Baca meniskus sejajar mata.', perawatan:'Keringkan sebelum simpan.', bahaya:['📏 Ketelitian']},
-      {id:'statif', nama:'Statif & Klem', emoji:'🧱', fungsi:'Menahan peralatan (buret, kondensor).', penggunaan:'Kencangkan secukupnya; cek stabilitas.', perawatan:'Keringkan dari korosi.', bahaya:['🧲 Jatuh/terjepit']},
-      {id:'thermo', nama:'Termometer', emoji:'🌡️', fungsi:'Mengukur suhu.', penggunaan:'Jangan menyentuh dasar bejana saat pengukuran.', perawatan:'Simpan dalam tabung pelindung.', bahaya:['❄️/🔥 Ekstrem']},
-      {id:'bunsen', nama:'Pembakar Bunsen', emoji:'🔥', fungsi:'Pemanasan nyala terbuka.', penggunaan:'Atur udara untuk nyala biru; jauhkan bahan mudah terbakar.', perawatan:'Periksa kebocoran selang gas.', bahaya:['🔥 Terbakar','💨 Gas']},
-      {id:'balance', nama:'Neraca Analitik', emoji:'⚖️', fungsi:'Menimbang massa presisi.', penggunaan:'Gunakan boat/kertas timbang; tutup pintu saat menimbang.', perawatan:'Kalibrasi berkala.', bahaya:['📏 Presisi','⚡ Listrik']},
-      {id:'spatula', nama:'Spatula', emoji:'🥄', fungsi:'Memindahkan padatan.', penggunaan:'Gunakan bersih dan kering.', perawatan:'Lap kering setelah pakai.', bahaya:['🧼 Kebersihan']},
-      {id:'mortir', nama:'Mortir & Alu', emoji:'🪨', fungsi:'Menggerus padatan.', penggunaan:'Gerus bertahap; hindari material terlalu keras.', perawatan:'Bersihkan residu segera.', bahaya:['🧱 Debu']},
-      {id:'corong', nama:'Corong Kaca', emoji:'🔻', fungsi:'Membantu penuangan/filtrasi.', penggunaan:'Gunakan kertas saring sesuai ukuran.', perawatan:'Hati-hati tepi tajam.', bahaya:['🧪 Percikan']},
-      {id:'corpisah', nama:'Corong Pisah', emoji:'🍐', fungsi:'Ekstraksi cair-cair.', penggunaan:'Lepas penutup saat membuka keran; buang tekanan.', perawatan:'Lumasi keran jika perlu.', bahaya:['💥 Tekanan','🛢️ Pelarut']},
-      {id:'penjepit', nama:'Penjepit Tabung Reaksi', emoji:'🧷', fungsi:'Memegang tabung saat pemanasan.', penggunaan:'Jepit pada bagian atas, miringkan tabung.', perawatan:'Pastikan pegas kuat.', bahaya:['🔥 Panas']},
-      {id:'watch', nama:'Kaca Arloji', emoji:'🍽️', fungsi:'Menutup bejana, menguapkan sedikit larutan.', penggunaan:'Jangan paparkan panas berlebih.', perawatan:'Cuci & keringkan.', bahaya:['🧪 Percikan']},
-      {id:'filterpaper', nama:'Kertas Saring', emoji:'🧻', fungsi:'Filtrasi.', penggunaan:'Lipat kerucut; basahi sebelum filtrasi.', perawatan:'Simpan kering.', bahaya:['🧼 Kebersihan']},
-      {id:'phmeter', nama:'pH Meter', emoji:'🔌', fungsi:'Mengukur pH presisi.', penggunaan:'Kalibrasi 2–3 buffer; bilas elektroda.', perawatan:'Simpan elektroda dalam larutan penyimpanan.', bahaya:['⚡ Listrik','📏 Presisi']},
-      {id:'hotplate', nama:'Hot Plate & Stirrer', emoji:'🍳', fungsi:'Pemanasan & pengadukan magnetik.', penggunaan:'Gunakan batang pengaduk; hati-hati permukaan panas.', perawatan:'Matikan & dinginkan sebelum simpan.', bahaya:['🔥 Panas','⚡ Listrik']},
-      {id:'desikator', nama:'Desikator', emoji:'🫙', fungsi:'Menyimpan sampel kering.', penggunaan:'Gunakan grease tipis pada penutup.', perawatan:'Ganti desikan bila jenuh.', bahaya:['💥 Vakum ringan']},
-      {id:'micropipet', nama:'Mikropipet', emoji:'📏', fungsi:'Mengambil volume mikro.' , penggunaan:'Gunakan tip; hindari melebihi rentang.', perawatan:'Kalibrasi & bersihkan secara berkala.', bahaya:['📏 Presisi']}
-    ];
-
-    // ======= Galeri Render =======
-    function renderGaleri(){
-      const grid = document.getElementById('alatGrid');
-      grid.innerHTML = '';
-      ALAT.forEach(a=>{
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.tabIndex = 0;
-        card.setAttribute('role','button');
-        card.setAttribute('aria-label', a.nama);
-        card.innerHTML = `
-          <div class="thumb" aria-hidden="true">${a.emoji}</div>
-          <h4>${a.nama}</h4>
-          <p>${a.fungsi}</p>
-          <div class="card-actions">
-            <button class="btn" onclick="bukaDetail('${a.id}')">Detail</button>
-          </div>`;
-        grid.appendChild(card);
-      });
-    }
-
-    // ======= Modal Detail =======
-    function bukaDetail(id){
-      const a = ALAT.find(x=>x.id===id);
-      if(!a) return;
-      document.getElementById('alatTitle').textContent = a.nama + ' ' + a.emoji;
-      document.getElementById('alatFungsi').textContent = 'Fungsi: ' + a.fungsi;
-      document.getElementById('alatInfo').textContent = 'Cara penggunaan: ' + a.penggunaan;
-      document.getElementById('alatPerawatan').textContent = 'Perawatan: ' + a.perawatan;
-      document.getElementById('alatBahaya').innerHTML = a.bahaya.map(b=>`<span class="badge">${b}</span>`).join(' ');
-      document.getElementById('alatModal').style.display='block';
-      // tandai kunjungan
-      localStorage.setItem('visited_'+id,'true');
-      updateProgress();
-    }
-    function tutupModal(){ document.getElementById('alatModal').style.display='none'; }
-
-    // ======= Navigasi dengan state =======
-    document.querySelectorAll('.nav-link').forEach(link=>{
-      link.addEventListener('click',e=>{
-        e.preventDefault();
-        document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-        document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
-        link.classList.add('active');
-        const id = link.getAttribute('data-target');
-        document.getElementById(id).classList.add('active');
-        sessionStorage.setItem('activeSection', id);
-        window.scrollTo({top:0,behavior:'smooth'});
-      });
-    });
-    document.addEventListener('DOMContentLoaded',()=>{
-      const saved = sessionStorage.getItem('activeSection');
-      if(saved && document.getElementById(saved)){
-        document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-        document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
-        document.querySelector(`.nav-link[data-target="${saved}"]`)?.classList.add('active');
-        document.getElementById(saved).classList.add('active');
-      }
-    });
-
-    // ======= Progress =======
-    function updateProgress(){
-      // target: kunjungi minimal 10 alat + selesaikan 2 kuis (DnD & PG)
-      const alatVisited = ALAT.filter(a=>localStorage.getItem('visited_'+a.id)==='true').length;
-      const quiz1 = localStorage.getItem('dnd_score') ? 1 : 0;
-      const quiz2 = localStorage.getItem('quiz_score') ? 1 : 0;
-      const max = 12; // 10 alat + 2 kuis
-      const progress = Math.min(100, Math.round(((Math.min(alatVisited,10) + quiz1 + quiz2) / max) * 100));
-      document.getElementById('progressFill').style.width = progress + '%';
-      document.getElementById('progressText').textContent = progress + '%';
-      localStorage.setItem('learningProgress', progress);
-    }
-
-    // ======= Pencarian & Highlight =======
-    function searchContent(){
-      const term = document.getElementById('searchInput').value.trim().toLowerCase();
-      if(!term) return;
-      // buka galeri dulu
-      document.querySelector('.nav-link.active')?.classList.remove('active');
-      document.querySelector('.content-section.active')?.classList.remove('active');
-      document.querySelector('.nav-link[data-target="galeri"]').classList.add('active');
-      document.getElementById('galeri').classList.add('active');
-      // highlight nama yang cocok
-      const grid = document.getElementById('alatGrid');
-      [...grid.querySelectorAll('h4, p')].forEach(n=>n.innerHTML=n.textContent); // reset
-      let found=false;
-      ALAT.forEach((a,i)=>{
-        const card = grid.children[i];
-        const text = (a.nama+' '+a.fungsi+' '+a.penggunaan).toLowerCase();
-        if(text.includes(term)){
-          const h4 = card.querySelector('h4');
-          h4.innerHTML = h4.textContent.replace(new RegExp('('+term+')','gi'),'<span class="highlight">$1</span>');
-          found=true;
-        }
-      });
-      if(!found) alert('Tidak ditemukan. Coba kata kunci lain.');
-    }
-
-    // ======= Bookmark section aktif =======
-    function toggleBookmark(){
-      const active = document.querySelector('.content-section.active')?.id;
-      if(!active) return;
-      const marks = JSON.parse(localStorage.getItem('bookmarks')||'[]');
-      const idx = marks.indexOf(active);
-      const btn = document.getElementById('bookmarkBtn');
-      if(idx===-1){ marks.push(active); btn.textContent='✅ Bookmarked'; setTimeout(()=>btn.textContent='⭐ Bookmark',1500); }
-      else{ marks.splice(idx,1); btn.textContent='❌ Removed'; setTimeout(()=>btn.textContent='⭐ Bookmark',1500); }
-      localStorage.setItem('bookmarks', JSON.stringify(marks));
-    }
-    const obs = new MutationObserver(()=>{
-      const active = document.querySelector('.content-section.active')?.id;
-      const marks = JSON.parse(localStorage.getItem('bookmarks')||'[]');
-      document.getElementById('bookmarkBtn').textContent = marks.includes(active)?'✅ Bookmarked':'⭐ Bookmark';
-    });
-    obs.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
-
-    // ======= Drag & Drop =======
-    const DND_SAMPLES = [
-      {id:'buret', label:'Buret'},
-      {id:'pipvol', label:'Pipet Volumetrik'},
-      {id:'labuukur', label:'Labu Ukur'},
-      {id:'bunsen', label:'Bunsen'}
-    ];
-    function renderDnD(){
-      const names = document.getElementById('names');
-      const targets = document.getElementById('targets');
-      names.innerHTML=''; targets.innerHTML='';
-      // nama
-      DND_SAMPLES.forEach(x=>{
-        const tag=document.createElement('span');
-        tag.textContent=x.label; tag.className='draggable'; tag.draggable=true; tag.id='drag_'+x.id;
-        tag.addEventListener('dragstart',ev=>{ev.dataTransfer.setData('text/plain',x.id)});
-        names.appendChild(tag);
-      });
-      // target
-      DND_SAMPLES.forEach(x=>{
-        const card=document.createElement('div'); card.className='dropzone'; card.id='drop_'+x.id;
-        const alat=ALAT.find(a=>a.id===x.id);
-        card.innerHTML=`<div class="thumb" style="font-size:40px">${alat.emoji}</div><strong>${alat.nama}</strong><div class="badge" id="badge_${x.id}">Taruh di sini</div>`;
-        card.addEventListener('dragover',ev=>ev.preventDefault());
-        card.addEventListener('drop',ev=>{ev.preventDefault();const id=ev.dataTransfer.getData('text/plain');card.dataset.value=id;document.getElementById('badge_'+x.id).textContent='Dijatuhkan: '+(DND_SAMPLES.find(s=>s.id===id)?.label||'-');});
-        targets.appendChild(card);
-      });
-    }
-    function cekDnD(){
-      let benar=0; DND_SAMPLES.forEach(x=>{ const drop=document.getElementById('drop_'+x.id); if(drop?.dataset.value===x.id) benar++; });
-      const score = Math.round(100*benar/DND_SAMPLES.length);
-      document.getElementById('dndHasil').textContent = `Nilai DnD: ${score}%`;
-      localStorage.setItem('dnd_score', score);
-      updateProgress();
-    }
-
-    // ======= Kuis Pilihan Ganda =======
-    const QUIZ = [
-      {q:'Alat yang paling tepat untuk menyiapkan larutan standar 250 mL adalah...', opts:['Gelas ukur','Labu ukur','Beaker','Erlenmeyer'], a:1},
-      {q:'Untuk mengukur volume 25,00 mL dengan presisi tinggi digunakan...', opts:['Pipet tetes','Pipet volumetrik','Gelas ukur 50 mL','Beaker 50 mL'], a:1},
-      {q:'Saat menggunakan buret, langkah penting sebelum titrasi adalah...', opts:['Menggosok dengan pasir','Mengisi sampai penuh','Menghilangkan gelembung di ujung','Mengocok kuat'], a:2},
-      {q:'Alat yang menggunakan nyala terbuka dan perlu ventilasi baik adalah...', opts:['Hot plate','Bunsen','Desikator','Mikropipet'], a:1},
-      {q:'Elektroda pH meter sebaiknya disimpan dalam...', opts:['Air suling','Larutan penyimpanan khusus','Keringkan saja','Alkohol'], a:1}
-    ];
-    function renderQuiz(){
-      const box=document.getElementById('quizContainer');
-      box.innerHTML='';
-      QUIZ.forEach((it,idx)=>{
-        const q=document.createElement('div'); q.className='card';
-        q.innerHTML=`<div style="padding:1rem"><p><strong>${idx+1}. ${it.q}</strong></p>
-          ${it.opts.map((o,i)=>`<label style='display:block;margin:.35rem 0'><input type='radio' name='q${idx}' value='${i}'> ${o}</label>`).join('')}
-        <div id='res${idx}' class='badge'></div></div>`;
-        box.appendChild(q);
-      });
-    }
-    function checkQuiz(){
-      let benar=0; QUIZ.forEach((it,idx)=>{ const sel=document.querySelector(`input[name="q${idx}"]:checked`); const res=document.getElementById('res'+idx); if(!sel){res.textContent='Belum dijawab'; return;} if(parseInt(sel.value)===it.a){benar++; res.textContent='Benar'; res.style.background='#e9f9ef';} else {res.textContent='Salah'; res.style.background='#fdecea';} });
-      const score=Math.round(100*benar/QUIZ.length);
-      document.getElementById('quizScore').textContent=`Nilai Kuis: ${score}%`;
-      localStorage.setItem('quiz_score', score);
-      updateProgress();
-    }
-
-    // ======= Kuis Akhir (Modal) =======
-    const FINAL = [
-      {q:'Simbol APD yang selalu dipakai saat pemanasan?', opts:['Sarung tangan & kacamata','Sandal','Topi pesta','Masker kain saja'], a:0},
-      {q:'Langkah aman sebelum membuka keran corong pisah adalah...', opts:['Kocok kuat dengan tutup rapat','Arahkan ke teman','Lepas penutup untuk membuang tekanan','Panaskan dulu'], a:2}
-    ];
-    function bukaKuisAkhir(){document.getElementById('quizModal').style.display='block'; renderFinal();}
-    function tutupKuisAkhir(){document.getElementById('quizModal').style.display='none';}
-    function renderFinal(){
-      const box=document.getElementById('comprehensiveQuiz');
-      box.innerHTML='';
-      FINAL.forEach((it,idx)=>{
-        const wrap=document.createElement('div'); wrap.className='card';
-        wrap.innerHTML=`<div style="padding:1rem"><p><strong>${idx+1}. ${it.q}</strong></p>
-          ${it.opts.map((o,i)=>`<label style='display:block;margin:.35rem 0'><input type='radio' name='f${idx}' value='${i}'> ${o}</label>`).join('')}</div>`;
-        box.appendChild(wrap);
-      });
-    }
-    function checkComprehensiveQuiz(){
-      let benar=0; FINAL.forEach((it,idx)=>{ const sel=document.querySelector(`input[name="f${idx}"]:checked`); if(sel && parseInt(sel.value)===it.a) benar++; });
-      const score=Math.round(100*benar/FINAL.length);
-      document.getElementById('quizAkhirScore').textContent = `Skor Akhir: ${score}%`;
-      localStorage.setItem('final_score', score);
-updateProgress();
-}
-
-
-// ======= Init =======
-function init(){ renderGaleri(); renderDnD(); renderQuiz(); updateProgress(); }
-window.addEventListener('load', init);
-window.addEventListener('click', e=>{ if(e.target.id==='alatModal'||e.target.id==='quizModal') e.target.style.display='none'; });
-</script>
+    <script>
+        // JavaScript untuk interaktivitas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsi untuk memilih opsi kuis
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Fungsi pencarian
+            const searchInput = document.querySelector('.search-bar input');
+            const searchButton = document.querySelector('.search-bar button');
+            
+            searchButton.addEventListener('click', function() {
+                alert('Melakukan pencarian untuk: ' + searchInput.value);
+                // Implementasi pencarian sebenarnya akan ditambahkan di sini
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    alert('Melakukan pencarian untuk: ' + searchInput.value);
+                    // Implementasi pencarian sebenarnya akan ditambahkan di sini
+                }
+            });
+        });
+    </script>
 </body>
 </html>
